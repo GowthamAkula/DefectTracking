@@ -100,6 +100,6 @@ if(port==null || port=="") {
   port=3330;
 }
 
-app.listen(process.env.PORT || port, function() {
-  console.log("Server connected via Port: " + port);
+app.listen(port, function() {
+  console.log("Server connected successfully");
 });
