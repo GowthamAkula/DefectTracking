@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 val = [];
 var initialCount, defectsCount;
 const app = express();
-const port = 3330;
 
 app.set("view engine", "ejs");
 
@@ -95,6 +94,11 @@ app.get("/success", function(req, res) {
   mongoose.connection.close();
   res.sendFile(__dirname + "/success.html");
 });
+
+let port = process.env.PORT;
+if(port==null || port=="") {
+  port=3330;
+}
 
 app.listen(process.env.PORT || port, function() {
   console.log("Server connected via Port: " + port);
