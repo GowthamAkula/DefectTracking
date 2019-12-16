@@ -1,0 +1,25 @@
+body {
+  font-family: Roboto;
+}
+
+#main-body {
+  background-color: #E9FCFA;
+  }
+
+.navbar-brand{
+  color: #fff;
+  font-size: 2rem;
+}
+
+.container-fluid {
+  padding: 2% 15%;
+}
+
+h4{
+  padding-top: 1rem;
+  margin: 0 1rem 0;
+}
+
+.row{
+  margin: 2rem;
+}

@@ -1,0 +1,23 @@
+{
+  "name": "defecttracking",
+  "version": "1.0.0",
+  "description": "Defect Tracking Quality Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Gowtham Akula",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "classes": "^0.3.0",
+    "confirm-dialog": "^0.1.2",
+    "ejs": "^3.0.1",
+    "event": "^1.0.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.3.5",
+    "mongoose": "^5.7.13",
+    "tap-event": "^1.0.0"
+  }
+}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Bed Report Logging</title>
+  <link rel="icon" href="images/SleepNumber.ico" type="image/icon type">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CDN CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+
+
+</head>
+
+<body>
+  <section id="main-body">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="">Issue Information</a>
+      </nav>
+      <h4>Please fill the details below</h4>
+      <form action="/" method="post">
+        <div class=" form-group row">
+          <div class="col-4">
+            <label>Type of Report</label>
+          </div>
+          <div class="col-4">
+            <input type="radio" id="Fdbk" name="reportType" value="feedback" checked> Feedback </input>
+          </div>
+          <div class="col-4">
+            <input type="radio" id="Dfct" name="reportType" value="defect"> Defect </input>
+          </div>
+        </div>
+        <div class=" form-group row">
+          <div class="col-4">
+            <label>First Name</label>
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control" name="fnm" placeholder="First Name" required autofocus>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-4">
+            <label>Last Name</label>
+          </div>
+          <div class="col-8">
+            <input type="text" class="form-control" name="lnm" placeholder="Last Name" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-4">
+            <label>SIQ Email Address</label>
+          </div>
+          <div class="col-8">
+            <input type="email" class="form-control" name="Email" placeholder="email" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-4">
+            <label>Issue encountered on</label>
+          </div>
+          <div class="col-6">
+            <input type="date" class="form-control" name="date" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-4">
+            <label for="selectComp">Select the component(s) to be reported
+              <p>(Press Ctrl + Option to select multiple)</p>
+            </label>
+          </div>
+          <div class="col-4">
+            <select class="form-control" id="selectComp" name="selComp" onchange="showTextField()" required autofocus>
+              <option>Pump</option>
+              <option>Chamber</option>
+              <option>Control box</option>
+              <option>RSO</option>
+              <option>Remote</option>
+              <option>SleepIQ App</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="col-4" id="specifyOther" style="visibility:hidden">
+            <input type="text" class="form-control" name="other" placeholder="Specify other">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-4">
+            <label>Briefly describe the issue
+              <input class="form-control" disabled maxlength="3" rows="5" size="3" value="999" id="counter" style="position:bottom">
+            </label>
+          </div>
+          <div class="col-8">
+            <textarea class="form-control" rows="5" cols="50" name="info" onkeypress="textCounter(this,'counter',999)" placeholder="Provide the defect details here in less than 1000 charecters" id="message"></textarea>
+          </div>
+          <!-- <div class="col">
+            <input class="form-control" disabled maxlength="3" size="3" value="999" id="counter" style="position:bottom">
+          </div> -->
+        </div>
+        <div class="form-group row">
+          <div class="col-4">
+            <label>Is the defective component a replacement</label>
+          </div>
+          <div class="col-2">
+            <input type="radio" name="replComp" value="yes" id="yesCheck" onclick="yesnoCheck()"> Yes </input>
+          </div>
+          <div class="col-6">
+            <input type="radio" name="replComp" value="no" id="noCheck" onclick="yesnoCheck()" checked> No </input>
+          </div>
+        </div>
+        <div class="form-group row" id="hiddenRow" style="visibility:hidden">
+          <div class="col-4">
+            <label>Who replaced the component</label>
+          </div>
+          <div class="col-2">
+            <input type="radio" name="whoReplcd" value="QT" checked> Quality Team </input>
+          </div>
+          <div class="col-6">
+            <input type="radio" name="whoReplcd" value="CS"> Customer Support </input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <button class="btn btn-secondary " type="submit" name="button">Submit</button>
+
+        </div>
+
+    </div>
+    </form>
+  </section>
+
+  <script>
+    function textCounter(field, field2, maxlimit) {
+      var countfield = document.getElementById(field2);
+      if (field.value.length > maxlimit) {
+        field.value = field.value.substring(0, maxlimit);
+        return false;
+      } else {
+        countfield.value = maxlimit - field.value.length;
+      }
+    }
+
+    function yesnoCheck() {
+      if (document.getElementById('yesCheck').checked) {
+        document.getElementById('hiddenRow').style.visibility = 'visible';
+      } else document.getElementById('hiddenRow').style.visibility = 'hidden';
+    }
+
+    function showTextField() {
+      if (document.getElementById('selectComp').value == 'Other') {
+        document.getElementById('specifyOther').style.visibility = 'visible';
+      } else document.getElementById('specifyOther').style.visibility = 'hidden';
+    }
+  </script>
+  <!-- JQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</body>
+
+</html>
