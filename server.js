@@ -14,13 +14,19 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+//MongoDB connection declaration
+let dbConn = process.env.DATABSE_URI;
+if(dbConn==null || dbConn=="") {
+  dbConn="mongodb+srv://admin-gowtham:Sleep123@defecttracking-xevxp.mongodb.net/DefectTrackingDB?retryWrites=true&w=majority";
+}
 const mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://admin-gowtham:Sleep123@defecttracking-xevxp.mongodb.net/DefectTrackingDB?retryWrites=true&w=majority", {
+mongoose.connect(dbConn, {
   useNewUrlParser: true
 }).catch(function(error) {
   console.error(error);
 });
 
+//DB Schema
 const defectSchema = new mongoose.Schema({
   reportType: String,
   firstName: String,
@@ -34,13 +40,15 @@ const defectSchema = new mongoose.Schema({
   replacedBy: String
 });
 
+//DB Model instance
 const Defect = mongoose.model("Defect", defectSchema);
 
-
+//Default root
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
+//Adding data Doc to the DB
 app.post("/", function(req, res) {
   if (req.body.selComp != "Other") {
     req.body.other = "NA";
@@ -70,6 +78,7 @@ app.post("/", function(req, res) {
     replacedBy: val[9]
   });
 
+  // Catching issue when saving the record
   try {
     defect.save(function(err, product) {
       if (err) {
@@ -86,15 +95,18 @@ app.post("/", function(req, res) {
   }
 });
 
+//Route for Failure
 app.post("/failure", function(req, res) {
   res.redirect("/");
 });
 
+//Route for Success
 app.get("/success", function(req, res) {
   mongoose.connection.close();
   res.sendFile(__dirname + "/success.html");
 });
 
+//Port declaration for app listening
 let port = process.env.PORT;
 if(port==null || port=="") {
   port=3330;
