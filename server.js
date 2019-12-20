@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 //MongoDB connection declaration
-let dbConn = process.env.DATABSE_URI;
+let dbConn = process.env.DATABASE_URI;
 if(dbConn==null || dbConn=="") {
   dbConn="mongodb+srv://admin-gowtham:Sleep123@defecttracking-xevxp.mongodb.net/DefectTrackingDB?retryWrites=true&w=majority";
 }
@@ -102,7 +102,7 @@ app.post("/failure", function(req, res) {
 
 //Route for Success
 app.get("/success", function(req, res) {
-  mongoose.connection.close();
+  //mongoose.connection.close();
   res.sendFile(__dirname + "/success.html");
 });
 
